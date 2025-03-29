@@ -1,0 +1,228 @@
+/* styles.css */
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #000000;
+    color: white;
+}
+
+/* Navbar Styles */
+.navbar {
+    display: flex;
+    justify-content: flex-end;
+    background-color:  #000000;
+    padding: 10px 20px;
+}
+
+.navbar ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar ul li {
+    margin: 0 15px;
+}
+
+.navbar ul li a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.navbar ul li a:hover {
+    color: #FFD700;
+}
+
+.nav-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+button {
+    /* background-color: #015FC7; */
+    border: none;
+    padding: 10px 20px;
+    margin: 0 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+}
+
+.nav-login, .nav-signup {
+    background-color: #015FC7;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    display: inline-block;
+}
+
+.nav-login:hover, .nav-signup:hover {
+    background-color: #013B84;
+}
+
+/* Main Container */
+.main-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 50px;
+    height: calc(100vh - 50px);
+}
+
+.left-side .logo {
+    width: 500px;
+}
+
+.right-side {
+    text-align: right;
+}
+
+.main-text {
+    font-size: 2.5rem;
+    margin: 0;
+}
+
+.sub-text {
+    font-size: 4rem;
+    margin: 10px 0;
+    color: #015FC7;
+}
+
+.buttons {
+    margin-top: 20px;
+}
+
+.btn {
+    text-decoration: none;
+    padding: 10px 20px;
+    margin: 0 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.get-started {
+    background-color: #015FC7;
+    color: white;
+}
+
+.get-started:hover {
+    background-color: #013B84;
+}
+
+.read-more {
+    background-color: white;
+    color: #004EA4;
+}
+
+.read-more:hover {
+    background-color: #013B84;
+}
+
+.footer .division{
+    height: 40vh;
+    width: 33.33%;
+    padding:min(30px,20%);
+}
+.footer{
+    background-color: #001124;
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 40vh;
+}
+.footer ul li{
+    list-style: none;
+}
+.footer .f-1 .list-1{
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+    margin-left: 30%;
+}
+.footer .f-2{
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+}
+.footer .f-2 .list-2{
+    display: flex;
+    justify-content:space-evenly;
+    align-items: baseline;
+}
+
+.f-2 .logos ul{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+}
+.logos div p{
+    font-family: "Playwrite IN", serif;
+    margin-top: 15px;
+    text-align: center;
+}
+.footer .f-3 form{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+.division h6{
+    color: #0587ff;
+}
+.division li a{
+   text-decoration: none;
+   color: white;
+}
+.loginPage{
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.login a{
+    color: white;
+}
+.loginPage .loginLogo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50vw;
+}
+.loginPage .loginLogo img{
+    width: 400px;
+}
+.loginPage .signupLogo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50vw;
+    
+}
+.loginPage .login{
+    width: 50vw;
+    
+}
+.loginPage .signupLogo img{
+    width: 400px; 
+}
+.form-text{
+    color: white;
+}

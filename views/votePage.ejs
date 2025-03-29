@@ -1,0 +1,64 @@
+<% layout('/layouts/login_navbar.ejs') -%>
+<%- include('./layouts/flash_tailwind.ejs') %>
+
+<div class="container mx-auto p-6">
+    <h1 class="text-3xl font-bold text-gray-800 mb-6">🗳 Vote in <%= election.title %></h1>
+
+    <div class="bg-white shadow-md rounded-lg p-6 mb-6">
+        <p class="text-gray-600 mb-2"><strong>Description:</strong> <%= election.description %></p>
+        <p class="text-gray-600 mb-2"><strong>Election Type:</strong> <%= election.electionType %></p>
+        <p class="text-gray-600"><strong>Ends on:</strong> <%= election.endTime.toLocaleString('en-US', { dateStyle: 'medium', timeStyle: 'short' }) %></p>
+    </div>
+
+    <% if (election.voters.includes(user._id)) { %>
+        <!-- User has already voted -->
+        <div class="text-center text-red-600 font-semibold text-lg mb-4">
+            ❌ You have already voted in this election.
+        </div>
+    <% } %>
+
+    <% if (election.ApprovedCandidates.length > 0) { %>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <% for (candidate of election.ApprovedCandidates) { %>
+                <div class="border rounded-lg p-6 shadow-md bg-white">
+                    <div class="flex flex-col items-center">
+                        <div class="w-24 h-24 bg-gray-300 rounded-full flex items-center justify-center text-2xl font-semibold">
+                            <%= candidate.userId.name.charAt(0) %>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-700 mt-4"><%= candidate.userId.name %></h3>
+                        <p class="text-gray-600 text-sm"><strong>Email:</strong> <%= candidate.userId.email %></p>
+                        <p class="text-gray-600 text-sm"><strong>College:</strong> <%= candidate.userId.college %></p>
+                        <% if (candidate.manifesto) { %>
+                            <p class="text-gray-600 text-sm mt-2 italic">"<%= candidate.manifesto %>"</p>
+                        <% } %>
+                    </div>
+
+                    <% if (!election.voters.includes(user._id)) { %>
+                        <!-- Show vote button if user hasn't voted -->
+                        <form action="/login/<%= user._id %>/vote/<%= election._id %>/<%= candidate._id %>" 
+                            method="post" 
+                            class="mt-4"
+                            onsubmit="return confirmVote('<%= candidate.userId.name %>')">
+                            <button class="bg-green-500 hover:bg-green-700 text-white py-2 px-4 rounded-md w-full">
+                                ✅ Vote
+                            </button>
+                        </form>
+                    <% } else { %>
+                        <!-- Disable button if user has already voted -->
+                        <button class="bg-gray-400 text-white py-2 px-4 rounded-md w-full cursor-not-allowed" disabled>
+                            🗳 Vote Casted
+                        </button>
+                    <% } %>
+                </div>
+            <% } %>
+        </div>
+    <% } else { %>
+        <p class="text-gray-600 text-center">No approved candidates available for this election.</p>
+    <% } %>
+</div>
+
+<script>
+    function confirmVote(candidateName) {
+        return confirm(`Are you sure you want to vote for ${candidateName}? This action cannot be undone.`);
+    }
+</script>

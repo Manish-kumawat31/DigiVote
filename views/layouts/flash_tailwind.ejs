@@ -1,0 +1,23 @@
+<% if(success && success.length){ %>
+    <div class="fixed top-4 right-4 z-50 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg flex items-center gap-3 transition-opacity duration-500 flash-message">
+      <span><%= success %></span>
+      <button onclick="this.parentElement.remove()" class="text-white text-lg font-bold">&times;</button>
+    </div>
+<% } %>
+
+<% if(error && error.length){ %>
+    <div class="fixed top-4 right-4 z-50 bg-red-500 text-white px-6 py-3 rounded-lg shadow-lg flex items-center gap-3 transition-opacity duration-500 flash-message">
+      <span><%= error %></span>
+      <button onclick="this.parentElement.remove()" class="text-white text-lg font-bold">&times;</button>
+    </div>
+<% } %>
+
+<script>
+  // Auto-hide flash messages after 3 seconds
+  setTimeout(() => {
+    document.querySelectorAll('.flash-message').forEach(msg => {
+      msg.style.opacity = '0';
+      setTimeout(() => msg.remove(), 500);
+    });
+  }, 3000);
+</script>

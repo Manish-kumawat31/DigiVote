@@ -1,0 +1,71 @@
+/* Glassmorphism Navbar - More Visible */
+.glass-navbar {
+    background: rgba(0, 0, 0, 0.6); /* Darker transparent background */
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 12px 20px;
+}
+
+/* Navbar Brand */
+.navbar-brand {
+    font-size: 1.6rem;
+    color: white !important;
+    font-weight: bold;
+    transition: color 0.3s ease-in-out;
+}
+
+/* Navbar Links */
+.navbar-nav .nav-link {
+    font-size: 1rem;
+    color: white !important;
+    transition: color 0.3s ease-in-out;
+}
+.navbar-nav .nav-link:hover {
+    color: #ffdd57 !important; /* Yellow highlight */
+}
+
+/* Custom Navbar Toggler */
+.custom-toggler {
+    border: none;
+    background: none;
+}
+.custom-toggler:focus {
+    box-shadow: none;
+}
+.navbar-toggler-icon {
+    filter: invert(1); /* Makes the icon white */
+}
+
+/* Dropdown Menu */
+.dropdown-menu {
+    background-color: #222; /* Dark dropdown */
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0px 4px 10px rgba(60, 54, 54, 0.2);
+}
+.dropdown-menu a {
+    color: white !important;
+    padding: 10px 15px;
+    transition: background 0.3s;
+}
+.dropdown-menu a:hover {
+    background-color: #444; /* Darker hover effect */
+}
+
+/* Logout Button */
+.dropdown-menu .text-danger {
+    color: #ff4d4d !important;
+    font-weight: bold;
+}
+
+/* Responsive Navbar */
+@media (max-width: 992px) {
+    .navbar-collapse {
+        background: rgba(0, 0, 0, 0.9);
+        padding: 10px;
+        border-radius: 10px;
+    }
+    .nav-link, .dropdown-menu {
+        text-align: center;
+    }
+}

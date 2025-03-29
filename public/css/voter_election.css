@@ -1,0 +1,94 @@
+/* Main Box */
+.main-box {
+    max-width: 900px;
+    margin: auto;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(12px);
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Election Container */
+.election-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+/* Election Card */
+.panel {
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    border-radius: 12px;
+    padding: 15px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.panel:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Dropdown Styling */
+.dropdown-toggle {
+    display: block;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    border-radius: 8px;
+    padding: 10px;
+    color: white;
+    font-weight: bold;
+    text-align: left;
+    transition: background 0.3s;
+}
+
+.dropdown-toggle:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* Dropdown Menu */
+.dropdown-menu {
+    background: #222;
+    border-radius: 10px;
+    overflow: hidden;
+    padding: 10px;
+}
+
+.dropdown-item {
+    color: white !important;
+    padding: 8px 15px;
+}
+
+.dropdown-item span {
+    font-weight: bold;
+    color: #ffdd57; /* Yellow for labels */
+}
+
+.dropdown-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* Candidate Button */
+.btn-primary {
+    width: 100%;
+    background: linear-gradient(135deg, #ff7b00, #ff3d3d);
+    border: none;
+    padding: 10px;
+    font-weight: bold;
+    border-radius: 8px;
+    transition: background 0.3s ease-in-out;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, #ff3d3d, #ff7b00);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .election-container {
+        grid-template-columns: 1fr;
+    }
+}

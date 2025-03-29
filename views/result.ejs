@@ -1,0 +1,50 @@
+<% layout('/layouts/login_navbar.ejs') -%>
+<%- include('./layouts/flash_tailwind.ejs') %>
+
+<div class="container mx-auto p-6">
+    <!-- Header -->
+    <div class="flex justify-between items-center mb-6">
+        <h1 class="text-4xl font-bold text-gray-900 flex items-center gap-2">
+            🏆 <span class="drop-shadow-md">Election Results</span>
+        </h1>
+        <span class="bg-blue-100 text-blue-800 px-4 py-2 rounded-lg text-sm font-medium shadow">
+            Welcome, <%= user.name %>
+        </span>
+    </div>
+
+    <!-- Election Details -->
+    <div class="bg-white shadow-lg rounded-lg p-6 mb-8">
+        <h2 class="text-2xl font-semibold text-gray-900 mb-4"><%= election.title %></h2>
+        <p class="text-gray-600 text-lg mb-2"><%= election.description %></p>
+        <p class="text-gray-500"><strong>Ended on:</strong> <%= new Date(election.endTime).toLocaleString('en-IN', { dateStyle: 'medium', timeStyle: 'short' }) %></p>
+    </div>
+
+    <% const currentTime = new Date(); %>
+
+    <% if (election.resultDeclared) { %>
+        <!-- Results Declared -->
+        <div class="bg-white shadow-lg rounded-lg p-6">
+            <h2 class="text-2xl font-semibold text-gray-900 mb-4">📊 Election Results</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <% for (candidate of election.ApprovedCandidates) { %>
+                    <div class="border rounded-lg p-5 shadow-md hover:shadow-lg transition duration-200 
+                        <% if (candidate._id.toString() === election.winner.toString()) { %> 
+                            bg-yellow-100 border-yellow-500 
+                        <% } %>">
+                        <h3 class="text-xl font-semibold text-gray-800"><%= candidate.userId.name %></h3>
+                        <p class="text-gray-600"><strong>Votes:</strong> <%= candidate.votes %></p>
+                        <% if (candidate._id.toString() === election.winner.toString()) { %>
+                            <p class="text-green-700 font-bold mt-2">🏆 Winner</p>
+                        <% } %>
+                    </div>
+                <% } %>
+            </div>
+        </div>
+    <% } else { %>
+        <!-- Results Not Declared -->
+        <div class="bg-gray-100 border border-gray-300 rounded-lg p-6 text-center">
+            <h2 class="text-2xl font-semibold text-gray-900 mb-2">🕒 Results Not Declared Yet</h2>
+            <p class="text-gray-600">Results will be available after the election ends.</p>
+        </div>
+    <% } %>
+</div>

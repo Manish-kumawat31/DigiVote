@@ -1,0 +1,132 @@
+<% layout('/layouts/login_navbar.ejs') -%>
+<% if(user.info != undefined) { %>
+    <div class="flex justify-center items-center min-h-screen bg-gray-100 p-4">
+        <div class="flex flex-col lg:flex-row bg-white p-10 rounded-lg shadow-lg w-full max-w-5xl">
+            <div class="lg:w-1/2 flex-col justify-center items-center mb-6 lg:mb-0">
+                <img src="/images/default_profile.jpg" alt="profile" class="w-80 h-80 object-cover rounded-full">
+                <a href="/login/<%= user._id %>/profile/edit" class="mt-4 flex items-center gap-2 text-blue-500 hover:underline">
+                    <img src="/images/svg/edit.svg" alt="edit logo" class="w-6"> Edit Profile
+                </a>
+            </div>
+            <div class="lg:w-1/2">
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="col-span-1">
+                        <label class="font-semibold">Name:</label>
+                        <p><%= user.name %></p>
+                    </div>
+                    <div class="col-span-1">
+                        <label class="font-semibold">Email:</label>
+                        <p><%= user.email %></p>
+                    </div>
+                    <div class="col-span-1">
+                        <label class="font-semibold">Age:</label>
+                        <p><%= user.info.age %></p>
+                    </div>
+                    <div class="col-span-1">
+                        <label class="font-semibold">Department:</label>
+                        <p><%= user.info.department %></p>
+                    </div>
+                    <div class="col-span-1">
+                        <label class="font-semibold">Mobile Number:</label>
+                        <p>+91 <%= user.info.mobile %></p>
+                    </div>
+                    <div class="col-span-1">
+                        <label class="font-semibold">Std:</label>
+                        <p><%= user.info.std %></p>
+                    </div>
+                    <div class="col-span-1">
+                        <label class="font-semibold">Div:</label>
+                        <p><%= user.info.div %></p>
+                    </div>
+                    <% if(user.info.clubName) { %>
+                        <div class="col-span-1">
+                            <label class="font-semibold">Club Name:</label>
+                            <p><%= user.info.clubName %></p>
+                        </div>
+                    <% } %>
+                    <div class="col-span-1">
+                        <label class="font-semibold">Role:</label>
+                        <p><%= user.role %></p>
+                    </div>
+                    <div class="col-span-1">
+                        <label class="font-semibold">PRN:</label>
+                        <p><%= user.info.PRN %></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<% } else { %>
+    <div class="flex justify-center items-center min-h-screen bg-gray-100 p-4">
+        <div class="flex flex-col lg:flex-row bg-white p-10 rounded-lg shadow-lg w-full max-w-5xl">
+            <div class="lg:w-1/2 flex justify-center items-center mb-6 lg:mb-0">
+                <img src="/images/default_profile.jpg" alt="profile" class="w-80 h-80 object-cover rounded-full">
+            </div>
+            <div class="lg:w-1/2">
+                <form action="/login/<%= user._id %>/profile" method="post" class="grid grid-cols-2 gap-4">
+                    <div class="col-span-1">
+                        <label class="font-semibold">Department:</label>
+                        <select name="department" required class="w-full p-2 border rounded">
+                            <option value="" disabled selected>Select</option>
+                            <option value="Computer Engineering">Computer Engineering</option>
+                            <option value="Information Technology">Information Technology</option>
+                            <option value="Electronics & Telecommunication">Electronics & Telecommunication</option>
+                            <option value="Mechanical Engineering">Mechanical Engineering</option>
+                            <option value="Civil Engineering">Civil Engineering</option>
+                            <option value="Instrumentation & Control Engineering">Instrumentation & Control Engineering</option>
+                            <option value="Robotics & Automation">Robotics & Automation</option>
+                            <option value="Artificial Intelligence & Data Science">Artificial Intelligence & Data Science</option>
+                        </select>
+                    </div>
+                    <div class="col-span-1">
+                        <label class="font-semibold">Class:</label>
+                        <select name="std" required class="w-full p-2 border rounded">
+                            <option value="" disabled selected>Select</option>
+                            <option value="FE">FE</option>
+                            <option value="SE">SE</option>
+                            <option value="TE">TE</option>
+                            <option value="BE">BE</option>
+                        </select>
+                    </div>
+                    <div class="col-span-1">
+                        <label class="font-semibold">Division:</label>
+                        <select name="div" required class="w-full p-2 border rounded">
+                            <option value="" disabled selected>Select</option>
+                            <option value="A">A</option>
+                            <option value="B">B</option>
+                            <option value="C">C</option>
+                        </select>
+                    </div>
+                    <div class="col-span-1">
+                        <label class="font-semibold">Club Name:</label>
+                        <select name="clubName" class="w-full p-2 border rounded">
+                            <option value="" disabled selected>Select</option>
+                            <option value="NSS">NSS</option>
+                            <option value="GDGC">GDGC</option>
+                            <option value="ACES">ACES</option>
+                            <option value="IASC">IASC</option>
+                            <option value="ITESA">ITESA</option>
+                            <option value="VIHANG">VIHANG</option>
+                        </select>
+                    </div>
+                    <div class="col-span-1">
+                        <label class="font-semibold">Age:</label>
+                        <input type="number" name="age" required min="18" max="70" class="w-full p-2 border rounded">
+                    </div>
+                    <div class="col-span-1">
+                        <label class="font-semibold">Mobile Number:</label>
+                        <input type="text" name="number" required class="w-full p-2 border rounded">
+                        <p class="text-sm text-gray-500">Do not include +91</p>
+                    </div>
+                    <div class="col-span-1">
+                        <label class="font-semibold">PRN:</label>
+                        <input type="text" name="prn" required class="w-full p-2 border rounded">
+                    </div>
+                    <div class="col-span-2 flex justify-center">
+                        <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">Update</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+<% } %>

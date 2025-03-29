@@ -1,0 +1,87 @@
+<% layout('/layouts/login_navbar.ejs') -%>
+<div class="flex justify-center items-center min-h-screen bg-gray-100 p-4">
+    <div class="flex flex-col lg:flex-row bg-white p-10 rounded-lg shadow-lg w-full max-w-5xl">
+        <div class="lg:w-1/2 flex justify-center items-center mb-6 lg:mb-0">
+            <img src="/images/default_profile.jpg" alt="profile" class="w-80 h-80 object-cover rounded-full">
+        </div>
+        <div class="lg:w-1/2">
+            <form action="/login/<%= user._id %>/Profile?_method=PUT" method="post" class="space-y-6">
+                <div>
+                    <label for="name" class="block text-lg font-medium text-gray-700">Name</label>
+                    <input type="text" id="name" name="name" value="<%= user.name %>" class="w-full p-3 border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500" required>
+                </div>
+                <div>
+                    <label for="email" class="block text-lg font-medium text-gray-700">Email address</label>
+                    <input type="email" id="email" name="email" value="<%= user.email %>" class="w-full p-3 border-gray-300 rounded-lg shadow-sm bg-gray-100" disabled>
+                </div>
+                <div>
+                    <label for="department" class="block text-lg font-medium text-gray-700">Department</label>
+                    <select id="department" name="department" class="w-full p-3 border-gray-300 rounded-lg shadow-sm" required>
+                        <option value="" disabled selected>select</option>
+                        <option value="Computer Engineering" <%= user.info.department === "Computer Engineering" ? "selected" : "" %>>Computer Engineering</option>
+                        <option value="Information Technology" <%= user.info.department === "Information Technology" ? "selected" : "" %>>Information Technology</option>
+                        <option value="Electronics & Telecommunication" <%= user.info.department === "Electronics & Telecommunication" ? "selected" : "" %>>Electronics & Telecommunication</option>
+                        <option value="Mechanical Engineering" <%= user.info.department === "Mechanical Engineering" ? "selected" : "" %>>Mechanical Engineering</option>
+                        <option value="Civil Engineering" <%= user.info.department === "Civil Engineering" ? "selected" : "" %>>Civil Engineering</option>
+                        <option value="Instrumentation & Control Engineering" <%= user.info.department === "Instrumentation & Control Engineering" ? "selected" : "" %>>Instrumentation & Control Engineering</option>
+                        <option value="Robotics & Automation" <%= user.info.department === "Robotics & Automation" ? "selected" : "" %>>Robotics & Automation</option>
+                        <option value="Artificial Intelligence & Data Science" <%= user.info.department === "Artificial Intelligence & Data Science" ? "selected" : "" %>>Artificial Intelligence & Data Science</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="std" class="block text-lg font-medium text-gray-700">Standard</label>
+                    <select id="std" name="std" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+                        <option value="" disabled selected>Select</option>
+                        <option value="FE" <%= user.info.std === "FE" ? "selected" : "" %>>FE</option>
+                        <option value="SE" <%= user.info.std === "SE" ? "selected" : "" %>>SE</option>
+                        <option value="TE" <%= user.info.std === "TE" ? "selected" : "" %>>TE</option>
+                        <option value="BE" <%= user.info.std === "BE" ? "selected" : "" %>>BE</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="div" class="block text-lg font-medium text-gray-700">Division</label>
+                    <select id="div" name="div" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+                        <option value="" disabled selected>Select</option>
+                        <option value="A" <%= user.info.div === "A" ? "selected" : "" %>>A</option>
+                        <option value="B" <%= user.info.div === "B" ? "selected" : "" %>>B</option>
+                        <option value="C" <%= user.info.div === "C" ? "selected" : "" %>>C</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="clubname" class="block text-lg font-medium text-gray-700">Club Name</label>
+                    <select id="clubname" name="clubname" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+                        <option value="" disabled selected>Select</option>
+                        <option value="NSS" <%= user.info.clubName === "NSS" ? "selected" : "" %>>NSS</option>
+                        <option value="GDGC" <%= user.info.clubName === "GDGC" ? "selected" : "" %>>GDGC</option>
+                        <option value="ACES" <%= user.info.clubName === "ACES" ? "selected" : "" %>>ACES</option>
+                        <option value="IASC" <%= user.info.clubName === "IASC" ? "selected" : "" %>>IASC</option>
+                        <option value="ITESA" <%= user.info.clubName === "ITESA" ? "selected" : "" %>>ITESA</option>
+                        <option value="VIHANG" <%= user.info.clubName === "VIHANG" ? "selected" : "" %>>VIHANG</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="age" class="block text-lg font-medium text-gray-700">Age</label>
+                    <input type="number" id="age" name="age" value="<%= user.info.age %>" class="w-full p-3 border-gray-300 rounded-lg shadow-sm" required min="18" max="70">
+                </div>
+                <div>
+                    <label for="number" class="block text-lg font-medium text-gray-700">Mobile Number</label>
+                    <input type="text" id="number" name="number" pattern="\d{10}" value="<%= user.info.mobile %>" class="w-full p-3 border-gray-300 rounded-lg shadow-sm" required>
+                    <p class="text-sm text-gray-500">Do not include +91</p>
+                </div>
+                <div>
+                    <label for="role" class="block text-lg font-medium text-gray-700">Register as</label>
+                    <select id="role" name="role" class="w-full p-3 border-gray-300 rounded-lg shadow-sm bg-gray-100" disabled required>
+                        <option value="Voter">Voter</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="prn" class="block text-lg font-medium text-gray-700">PRN</label>
+                    <input type="text" id="prn" name="prn" value="<%= user.info.PRN %>" class="w-full p-3 border-gray-300 rounded-lg shadow-sm" required>
+                    <p class="text-sm text-gray-500">University PRN</p>
+                </div>
+                <button class="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 px-6 rounded-lg shadow">Update</button>
+            </form>
+        </div>
+    </div>
+</div>
+<script src="/js/formValidate.js"></script>

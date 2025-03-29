@@ -1,0 +1,93 @@
+<% layout('/layouts/login_navbar.ejs') -%>
+<div class="container mx-auto p-8 bg-gray-100 rounded-lg shadow-lg">
+    <form action="/login/admin/<%= user._id %>/create-election" method="post" class="grid gap-6">
+        <div class="w-2/3 mx-auto">
+            <label for="title" class="block font-bold text-gray-700">Title of Election</label>
+            <input type="text" id="title" name="title" placeholder="Election Title" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+        </div>
+        <div class="w-2/3 mx-auto">
+            <label for="description" class="block font-bold text-gray-700">Add Description</label>
+            <textarea id="description" name="description" rows="5" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"></textarea>
+        </div>
+        <div class="w-1/3 mx-auto">
+            <label for="electionType" class="block font-bold text-gray-700">Election Type</label>
+            <select id="electionType" name="electionType" onchange="toggleFields()" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+                <option value="" disabled selected>Select</option>
+                <option value="Institutional">Institutional Elections</option>
+                <option value="Club">Club/Organization Elections</option>
+            </select>
+        </div>
+        <div id="institutionalFields" class="w-2/3 mx-auto bg-white p-4 rounded-lg shadow-md">
+            <p class="font-bold text-gray-700">Eligible Voters: <span class="text-sm text-gray-500">(Select only desired field)</span></p>
+            <label for="department" class="block font-semibold text-gray-700">Department:</label>
+            <select id="department" name="eligibleVoters[department]" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+                <option value="" disabled selected>Select</option>
+                <option value="DYPCOE">DYPCOE</option>
+                <option value="Computer Engineering">Computer Engineering</option>
+                <option value="Information Technology">Information Technology</option>
+                <option value="Electronics & Telecommunication">Electronics & Telecommunication</option>
+                <option value="Mechanical Engineering">Mechanical Engineering</option>
+                <option value="Civil Engineering">Civil Engineering</option>
+                <option value="Instrumentation & Control Engineering">Instrumentation & Control Engineering</option>
+                <option value="Robotics & Automation">Robotics & Automation</option>
+                <option value="Artificial Intelligence & Data Science">Artificial Intelligence & Data Science</option>
+            </select>
+            <label for="eligibleClass" class="block font-semibold text-gray-700">Eligible Class:</label>
+            <select id="eligibleClass" name="eligibleVoters[class]" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+                <option value="" disabled selected>Select</option>
+                <option value="FE">FE</option>
+                <option value="SE">SE</option>
+                <option value="TE">TE</option>
+                <option value="BE">BE</option>
+            </select>
+            <label for="division" class="block font-semibold text-gray-700">Eligible Division:</label>
+            <select id="division" name="eligibleVoters[division]" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+                <option value="" disabled selected>Select</option>
+                <option value="A">A</option>
+                <option value="B">B</option>
+                <option value="C">C</option>
+            </select>
+        </div>
+        <div id="clubFields" class="w-1/3 mx-auto hidden bg-white p-4 rounded-lg shadow-md">
+            <label for="clubName" class="block font-semibold text-gray-700">Club Name:</label>
+            <select id="clubName" name="eligibleVoters[clubName]" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+                <option value="" disabled selected>Select</option>
+                <option value="NSS">NSS</option>
+                <option value="GDGC">GDGC</option>
+                <option value="ACES">ACES</option>
+                <option value="IASC">IASC</option>
+                <option value="ITESA">ITESA</option>
+                <option value="VIHANG">VIHANG</option>
+            </select>
+        </div>
+        <div class="w-2/3 mx-auto">
+            <label for="startTime" class="block font-bold text-gray-700">Start Date</label>
+            <input type="datetime-local" id="startTime" name="startTime" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+        </div>
+        <div class="w-2/3 mx-auto">
+            <label for="endTime" class="block font-bold text-gray-700">End Date</label>
+            <input type="datetime-local" id="endTime" name="endTime" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+        </div>
+        <button type="submit" class="w-1/3 mx-auto bg-blue-500 text-white py-3 px-6 rounded-lg hover:bg-blue-600 shadow-lg">Create</button>
+    </form>
+    <script src="/js/formValidate.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            toggleFields();
+        });
+        
+        function toggleFields() {
+            let electionType = document.getElementById("electionType").value;
+            let institutionalFields = document.getElementById("institutionalFields");
+            let clubFields = document.getElementById("clubFields");
+        
+            if (electionType === "Institutional") {
+                institutionalFields.classList.remove("hidden");
+                clubFields.classList.add("hidden");
+            } else if (electionType === "Club") {
+                institutionalFields.classList.add("hidden");
+                clubFields.classList.remove("hidden");
+            }
+        }
+    </script>
+</div>

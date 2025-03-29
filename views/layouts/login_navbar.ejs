@@ -1,0 +1,63 @@
+<head>
+    <link rel="stylesheet" href="/css/voter_navbar.css">  
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+    <nav class="fixed top-0 left-0 w-full bg-black bg-opacity-40 backdrop-blur-md shadow-md z-50">
+        <div class="container mx-auto flex justify-between items-center p-4">
+            <a href="/index" class="text-xl font-bold text-white">DigiVote</a>
+            
+            <button id="menu-toggle" class="text-white focus:outline-none lg:hidden">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                </svg>
+            </button>
+            
+            <div id="menu" class="hidden lg:flex flex-col lg:flex-row lg:space-x-6 absolute lg:relative top-16 lg:top-0 left-0 w-full lg:w-auto bg-black lg:bg-transparent p-5 lg:p-0 shadow-lg lg:shadow-none transition-all duration-300 ease-in-out">
+                <a href="/login/<%= user._id %>/home" class="text-white font-semibold block lg:inline-block px-4 py-2">Home</a>
+                
+                <!-- <% if(user.role === "Admin") { %>
+                    <a href="/login/admin/create-election" class="text-white font-semibold block lg:inline-block px-4 py-2">Create Election</a>
+                <% } %> -->
+                
+                <div class="relative">
+                    <button id="profile-menu-toggle" class="text-white font-semibold flex items-center px-4 py-2 w-full lg:w-auto">
+                        <%= user.name %>
+                        <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <div id="profile-menu" class="absolute right-0 mt-2 w-48 bg-white text-gray-900 rounded-lg shadow-lg hidden transition-all duration-200 ease-in-out">
+                        <a href="/login/<%= user._id %>/profile" class="block px-4 py-2 hover:bg-gray-200">My Profile</a>
+                        <a href="#" class="block px-4 py-2 hover:bg-gray-200">Elections</a>
+                        <a href="/auth/logout" class="block px-4 py-2 text-red-600 font-bold hover:bg-gray-200">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="main-box mt-20">
+        <%- body -%>
+    </div>
+
+    <script>
+        document.getElementById('menu-toggle').addEventListener('click', function () {
+            let menu = document.getElementById('menu');
+            menu.classList.toggle('hidden');
+        });
+
+        document.getElementById('profile-menu-toggle').addEventListener('click', function (event) {
+            event.stopPropagation();
+            document.getElementById('profile-menu').classList.toggle('hidden');
+        });
+
+        document.addEventListener('click', function (event) {
+            const profileMenu = document.getElementById('profile-menu');
+            if (!document.getElementById('profile-menu-toggle').contains(event.target)) {
+                profileMenu.classList.add('hidden');
+            }
+        });
+    </script>
+</body>

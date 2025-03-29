@@ -1,0 +1,66 @@
+<% layout('layouts/admin_biolerplate.ejs') -%>
+
+<div class="p-6">
+    <!-- Header -->
+    <div class="flex justify-between items-center mb-6">
+        <h1 class="text-3xl font-semibold text-gray-800">📝 Candidate Approvals</h1>
+    </div>
+
+    <!-- Election Details Card -->
+    <div class="bg-white shadow-lg rounded-lg p-6 mb-8">
+        <h2 class="text-xl font-semibold text-gray-700 mb-4">📋 Election Details</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+                <p class="text-gray-600"><strong>📌 Title:</strong> <span class="font-medium text-gray-900">CR</span></p>
+                <p class="text-gray-600"><strong>🏫 Type:</strong> <span class="font-medium text-gray-900">Institutional</span></p>
+                <p class="text-gray-600"><strong>📝 Description:</strong> <span class="font-medium text-gray-900">Computer department election</span></p>
+            </div>
+            <div>
+                <p class="text-gray-600"><strong>🕒 Start Time:</strong> <span class="font-medium text-gray-900">18/3/2025, 9:00 PM</span></p>
+                <p class="text-gray-600"><strong>⏳ End Time:</strong> <span class="font-medium text-gray-900">19/3/2025, 9:00 PM</span></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pending Candidate Approvals Table -->
+    <div class="bg-white shadow-lg rounded-lg p-6">
+        <h2 class="text-xl font-semibold text-gray-700 mb-4">⏳ Pending Candidate Approvals</h2>
+        <div class="overflow-x-auto">
+            <table class="min-w-full border border-gray-200 rounded-lg overflow-hidden">
+                <thead class="bg-blue-600 text-white">
+                    <tr>
+                        <th class="px-6 py-3 text-left text-sm font-medium tracking-wider">👤 Name</th>
+                        <th class="px-6 py-3 text-left text-sm font-medium tracking-wider">🆔 PRN No.</th>
+                        <th class="px-6 py-3 text-center text-sm font-medium tracking-wider">⚡ Actions</th>
+                    </tr>
+                </thead>
+                <tbody class="bg-white divide-y divide-gray-200">
+                    <% for (candidate of candidates){ %>
+                        <tr class="hover:bg-gray-100">
+                            <td class="px-6 py-4 text-sm font-medium text-gray-900">
+                                <%= candidate.name %>
+                            </td>
+                            <td class="px-6 py-4 text-sm text-gray-700">
+                                <%= candidate.info.PRN %>
+                            </td>
+                            <td class="px-6 py-4 text-center flex justify-center gap-3">
+                                <!-- Approve Button -->
+                                <form action="/login/admin/<%= user._id %>/approve/<%= candidate._id %>/<%= election._id %>" method="post">
+                                    <button class="bg-green-500 hover:bg-green-600 text-white text-sm font-bold py-2 px-4 rounded-lg shadow-md transition-all duration-200">
+                                        ✅ Approve
+                                    </button>
+                                </form>
+                                <!-- Reject Button -->
+                                <form action="/login/admin/<%= user._id %>/reject/<%= candidate._id %>/<%= election._id %>" method="post">
+                                    <button class="bg-red-500 hover:bg-red-600 text-white text-sm font-bold py-2 px-4 rounded-lg shadow-md transition-all duration-200">
+                                        ❌ Reject
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    <% } %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

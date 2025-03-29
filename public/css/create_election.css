@@ -1,0 +1,12 @@
+.create-election{
+    width: 60vw;
+    margin: auto;
+}
+.election-btn{
+    height: 3rem;
+}
+#institutionalFields{
+    display: none;
+    height: auto;
+    border: 1px solid rgb(200, 191, 191);
+}

@@ -1,0 +1,106 @@
+<% layout('/layouts/login_navbar.ejs') -%>
+<%- include('./layouts/flash_tailwind.ejs') %>
+
+<div class="container mx-auto p-6">
+    <!-- Header -->
+    <div class="flex justify-between items-center mb-6">
+        <h1 class="text-4xl font-bold text-gray-900 flex items-center gap-2">
+            🗳 <span class="drop-shadow-md">Election Dashboard</span>
+        </h1>
+        <span class="bg-blue-100 text-blue-800 px-4 py-2 rounded-lg text-sm font-medium shadow">
+            Welcome, <%= user.name %>
+        </span>
+    </div>
+
+    <% const currentTime = new Date(); %>
+
+    <!-- Ongoing Elections -->
+    <div class="bg-white shadow-lg rounded-lg p-6 mb-8">
+        <h2 class="text-2xl font-semibold text-gray-900 mb-4 flex items-center gap-2">
+            ⚡ Ongoing Elections
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <% for (election of userElections) { 
+                if (new Date(election.startTime) <= currentTime && new Date(election.endTime) > currentTime) { %>
+            <div class="border rounded-lg p-5 shadow-md hover:shadow-lg transition duration-200">
+                <h3 class="text-xl font-semibold text-gray-800"><%= election.title %></h3>
+                <p class="text-gray-500 text-sm mt-1"><%= election.description %></p>
+                <p class="text-gray-600"><strong>Ends:</strong> <%= new Date(election.endTime).toLocaleString('en-IN', { dateStyle: 'medium', timeStyle: 'short' }) %></p>
+                <% if (election.voters.includes(user._id)) { %>
+                    <p class="text-red-500 font-semibold text-center mt-4">❌ You have already voted.</p>
+                <% } else { %>
+                    <a href="/login/<%= user._id %>/vote/<%= election._id %>" class="block bg-green-600 hover:bg-green-700 text-white py-2 px-5 rounded-lg text-center mt-4 font-medium transition duration-200">
+                        Vote Now
+                    </a>
+                <% } %>
+            </div>
+            <% } } %>
+        </div>
+    </div>
+
+    <!-- Upcoming Elections -->
+    <div class="bg-white shadow-lg rounded-lg p-6 mb-8">
+        <h2 class="text-2xl font-semibold text-gray-900 mb-4 flex items-center gap-2">
+            📅 Upcoming Elections
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <% for (election of userElections) { 
+                if (new Date(election.startTime) > currentTime) { %>
+            <div class="border rounded-lg p-5 shadow-md hover:shadow-lg transition duration-200">
+                <h3 class="text-xl font-semibold text-gray-800"><%= election.title %></h3>
+                <p class="text-gray-500 text-sm mt-1"><%= election.description %></p>
+                <p class="text-gray-600 mt-3"><strong>Starts:</strong> <%= new Date(election.startTime).toLocaleString('en-IN', { dateStyle: 'medium', timeStyle: 'short' }) %></p>
+                <p class="text-gray-600"><strong>Ends:</strong> <%= new Date(election.endTime).toLocaleString('en-IN', { dateStyle: 'medium', timeStyle: 'short' }) %></p>
+                <% let isAlreadyCandidate = user.isCandidate.includes(election._id); %>
+                <% if (!isAlreadyCandidate) { %>
+                <form action="/login/<%= user._id %>/candidate/<%= election._id %>" method="post" class="mt-4">
+                    <button class="bg-blue-600 hover:bg-blue-700 text-white py-2 px-5 rounded-lg w-full font-medium transition duration-200">
+                        Apply as Candidate
+                    </button>
+                </form>
+                <% } %>
+            </div>
+            <% } } %>
+        </div>
+    </div>
+
+    <!-- Past Elections (Only from userElections) -->
+    <div class="bg-white shadow-lg rounded-lg p-6 mb-8">
+        <h2 class="text-2xl font-semibold text-gray-900 mb-4 flex items-center gap-2">
+            ⏳ Past Elections (You Participated)
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <% for (election of userElections) { 
+                if (new Date(election.endTime) <= currentTime) { %>
+            <div class="border rounded-lg p-5 shadow-md hover:shadow-lg transition duration-200">
+                <h3 class="text-xl font-semibold text-gray-800"><%= election.title %></h3>
+                <p class="text-gray-500 text-sm mt-1"><%= election.description %></p>
+                <p class="text-gray-600"><strong>Ended on:</strong> <%= new Date(election.endTime).toLocaleString('en-IN', { dateStyle: 'medium', timeStyle: 'short' }) %></p>
+                <a href="/login/result/<%= election._id %>" class="block bg-gray-600 hover:bg-gray-700 text-white py-2 px-5 rounded-lg text-center mt-4 font-medium transition duration-200">
+                    View Results
+                </a>
+            </div>
+            <% } } %>
+        </div>
+    </div>
+
+    <!-- Other Past Elections (From otherElections) -->
+    <div class="bg-white shadow-lg rounded-lg p-6">
+        <h2 class="text-2xl font-semibold text-gray-900 mb-4 flex items-center gap-2">
+            📜 Other Past Elections
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <% for (election of otherElections) { 
+                if (new Date(election.endTime) <= currentTime) { %>
+            <div class="border rounded-lg p-5 shadow-md hover:shadow-lg transition duration-200">
+                <h3 class="text-xl font-semibold text-gray-800"><%= election.title %></h3>
+                <p class="text-gray-500 text-sm mt-1"><%= election.description %></p>
+                <p class="text-gray-600"><strong>Ended on:</strong> <%= new Date(election.endTime).toLocaleString('en-IN', { dateStyle: 'medium', timeStyle: 'short' }) %></p>
+                <a href="/login/result/<%= election._id %>" class="block bg-gray-600 hover:bg-gray-700 text-white py-2 px-5 rounded-lg text-center mt-4 font-medium transition duration-200">
+                    View Results
+                </a>
+            </div>
+            <% } } %>
+        </div>
+    </div>
+</div>

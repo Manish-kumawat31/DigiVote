@@ -1,0 +1,29 @@
+<nav class="bg-blue-700 text-white flex justify-between items-center p-4 shadow-md">
+    <div class="text-lg font-semibold">🗳 Digital Election System</div>
+    <div class="flex items-center gap-4">
+        <a href="/login/<%= user._id %>/home" class="bg-white text-blue-600 font-medium px-4 py-2 rounded-lg shadow hover:bg-gray-100 transition-all duration-200">
+            🏠 Home
+        </a>
+        <!-- <span class="text-green-300">🟢 Online</span> -->
+        <div class="relative">
+            <button id="adminButton" class="flex items-center gap-2 bg-white text-blue-700 px-3 py-2 rounded">
+                🔽 <%= user.name %> Admin
+            </button>
+            <div id="dropdownMenu" class="absolute right-0 mt-2 w-40 bg-white text-gray-700 shadow-lg rounded hidden">
+                <a href="/login/<%= user._id %>/profile" class="block px-4 py-2 hover:bg-gray-200">👤 Profile</a>
+                <a href="/auth/logout" class="block px-4 py-2 hover:bg-gray-200">🚪 Logout</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<script>
+    document.getElementById("adminButton").addEventListener("click", function (event) {
+        event.stopPropagation();
+        document.getElementById("dropdownMenu").classList.toggle("hidden");
+    });
+
+    document.addEventListener("click", function () {
+        document.getElementById("dropdownMenu").classList.add("hidden");
+    });
+</script>

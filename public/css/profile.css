@@ -1,0 +1,25 @@
+.container{
+    display: flex;
+    margin-top: 50px;
+    width: 100vw;
+    height: 70vh;
+}
+.container-show .section-right label{
+    color: rgb(1 85 179);
+}
+.container-show .section-right p{
+    font-size: x-large;
+    font-weight: 500;
+}
+
+.container .section-left{
+    width: 45vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+.container .section-right{
+    margin: auto;
+    width: 55vw
+}

@@ -1,0 +1,65 @@
+<% layout('layouts/admin_biolerplate.ejs') -%>
+
+<div class="flex">
+    <!-- Sidebar -->
+    <aside class="w-64 min-h-screen bg-gray-800 text-white p-4">
+        <h2 class="text-lg font-semibold mb-4">📌 Admin Panel</h2>
+        <ul class="space-y-3">
+            <li><a href="#" class="block px-4 py-2 hover:bg-gray-700 rounded">🏠 Home</a></li>
+            <li><a href="#" class="block px-4 py-2 hover:bg-gray-700 rounded">📊 Dashboard</a></li>
+            <li><a href="#" class="block px-4 py-2 hover:bg-gray-700 rounded">📑 Reports</a></li>
+            <li><a href="#" class="block px-4 py-2 hover:bg-gray-700 rounded">🗳 Votes</a></li>
+            <li><a href="#" class="block px-4 py-2 hover:bg-gray-700 rounded">⚙️ Manage</a></li>
+            <li><a href="#" class="block px-4 py-2 hover:bg-gray-700 rounded">👥 Voters</a></li>
+            <li><a href="#" class="block px-4 py-2 hover:bg-gray-700 rounded">🏆 Positions</a></li>
+            <li><a href="#" class="block px-4 py-2 hover:bg-gray-700 rounded">🎭 Candidates</a></li>
+        </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-grow p-6 bg-gray-100">
+        <div class="flex justify-between items-center bg-white p-4 rounded shadow mb-6">
+            <h1 class="text-xl font-semibold">Election List</h1>
+            <a href="/login/admin/<%= user._id %>/create-election">
+                <button class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded">+ Create Election</button>
+            </a>
+        </div>
+
+        <!-- Election Table -->
+        <div class="overflow-x-auto">
+            <table class="w-full bg-white shadow-md rounded-lg overflow-hidden">
+                <thead class="bg-blue-600 text-white">
+                    <tr>
+                        <th class="py-3 px-6 text-left">Title</th>
+                        <th class="py-3 px-6 text-left">Type</th>
+                        <th class="py-3 px-6 text-left">Status</th>
+                        <th class="py-3 px-6 text-center">Actions</th>
+                        <th class="py-3 px-6 text-center">Candidates</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% for(let election of allElection){ %>
+                    <tr class="border-b hover:bg-gray-100">
+                        <td class="py-3 px-6"><%= election.title %></td>
+                        <td class="py-3 px-6"><%= election.electionType %></td>
+                        <td class="py-3 px-6"><%= election.status %></td>
+                        <td class="py-3 px-6 flex justify-center gap-4">
+                            <a href="/login/admin/<%= user._id %>/<%= election._id %>/edit">
+                                <button class="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded">Edit</button>
+                            </a>
+                            <form action="/login/admin/<%= user._id %>/<%= election._id %>/delete?_method=DELETE" method="post">
+                                <button class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded">Delete</button>
+                            </form>
+                        </td>
+                        <td class="py-3 px-6 text-center">
+                            <a href="/login/admin/<%= user._id %>/<%= election._id %>/candidate">
+                                <button class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded">Give Approval</button>
+                            </a>
+                        </td>
+                    </tr>
+                    <% } %>
+                </tbody>
+            </table>
+        </div>
+    </main>
+</div>

@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 300" class="logo-svg">
+        <!-- Circle for the background -->
+        <circle cx="150" cy="150" r="100" fill="#004EA4" />
+
+        <!-- Pointer Hand -->
+        <path
+            d="M160,140 L190,180 L180,185 L150,155 L120,170 L110,165 L135,125 L150,135 Z"
+            fill="#FFFFFF"
+        />
+        <circle cx="150" cy="150" r="12" fill="#FFD700" /> <!-- Small finger action -->
+
+        <!-- VOTE button -->
+        <rect x="220" y="130" width="160" height="50" rx="8" fill="#0587FF" />
+        <text x="300" y="160" text-anchor="middle" fill="white" font-size="24" font-family="Arial, sans-serif">
+            VOTE
+        </text>
+
+        <!-- Mouse click lines -->
+        <line x1="160" y1="140" x2="180" y2="110" stroke="#FFFFFF" stroke-width="2" />
+        <line x1="150" y1="130" x2="170" y2="100" stroke="#FFFFFF" stroke-width="2" />
+    </svg>
