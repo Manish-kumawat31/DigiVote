@@ -1,0 +1,18 @@
+<body>
+    <!-- Enhanced Navbar -->
+<nav class="flex justify-between items-center p-5 bg-gray-900 shadow-lg sticky top-0 z-50 backdrop-blur-sm bg-opacity-90">
+    <div class="text-2xl font-bold gradient-text animate-fade">DigiVote</div>
+    <ul class="flex space-x-8 animate-fade" style="animation-delay: 0.2s">
+        <li><a href="/index/read-more" class="text-gray-300 hover:text-blue-400 transition-colors duration-300">About</a></li>
+        <li><a href="#contact" class="text-gray-300 hover:text-blue-400 transition-colors duration-300">Contact</a></li>
+    </ul>
+    <div class="space-x-4 animate-fade" style="animation-delay: 0.4s">
+        <% if (ifUser) { %>
+            <a href="/auth/logout" class="bg-blue-600 hover:bg-blue-700 px-5 py-2.5 rounded-lg font-medium transition-all hover-scale shadow-md">Logout</a>
+        <% } else { %>
+            <a href="/auth/login" class="bg-blue-600 hover:bg-blue-700 px-5 py-2.5 rounded-lg font-medium transition-all hover-scale shadow-md">Login</a>
+            <a href="/auth/signup" class="bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 px-5 py-2.5 rounded-lg font-medium transition-all hover-scale shadow-md">Signup</a>
+        <% } %>
+    </div>
+</nav>
+</body>

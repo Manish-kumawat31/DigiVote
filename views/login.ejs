@@ -1,32 +1,210 @@
 <% layout('/layouts/boilerplate') -%>
-<div class="flex justify-center items-center h-screen bg-black px-6">
-    <div class="flex w-1/2 justify-center items-center">
-        <img src="/images/svg/login.svg" alt="loginLogo" class="w-80">
-    </div>
-    <div class="w-1/3 bg-white/10 p-8 rounded-lg shadow-lg flex flex-col items-center">
-        <form action="/auth/Login" method="post" class="w-full space-y-4">
-            <div>
-                <label for="email" class="block text-white font-semibold">Email</label>
-                <input type="email" id="email" name="email"
-                    class="w-full p-2 mt-1 border border-blue-500 bg-transparent text-white rounded focus:outline-none focus:ring-2 focus:ring-yellow-400"
-                    required>
+
+<style>
+    /* Animation Styles */
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    .scroll-animate {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+    .animate-visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    
+    /* Gradient Background */
+    .auth-bg {
+        background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    }
+    
+    /* Form Card */
+    .auth-card {
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    /* Input Styles */
+    .auth-input {
+        background: rgba(0, 0, 0, 0.3);
+        transition: all 0.3s ease;
+    }
+    .auth-input:focus {
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
+    }
+    
+    /* Button Styles */
+    .auth-btn {
+        background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+        transition: all 0.3s ease;
+    }
+    .auth-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 20px -5px rgba(37, 99, 235, 0.4);
+    }
+    
+    /* Abstract Design Elements */
+    .auth-decoration {
+        position: relative;
+    }
+    .auth-decoration::before {
+        content: '';
+        position: absolute;
+        top: -50px;
+        left: -50px;
+        width: 200px;
+        height: 200px;
+        background: radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, transparent 70%);
+        z-index: -1;
+    }
+    .auth-decoration::after {
+        content: '';
+        position: absolute;
+        bottom: -100px;
+        right: -50px;
+        width: 300px;
+        height: 300px;
+        background: radial-gradient(circle, rgba(245, 158, 11, 0.1) 0%, transparent 70%);
+        z-index: -1;
+    }
+</style>
+
+<div class="min-h-screen auth-bg flex items-center justify-center p-6">
+    <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-16 items-center">
+        <!-- Left Side - Abstract Design -->
+        <div class="auth-decoration scroll-animate hidden md:block">
+            <div class="relative">
+                <!-- Voting Visualization -->
+                <div class="w-full h-64 flex items-center justify-center">
+                    <div class="relative w-48 h-48">
+                        <!-- Animated Circles -->
+                        <div class="absolute inset-0 rounded-full border-4 border-blue-500 border-opacity-30 animate-pulse"></div>
+                        <div class="absolute inset-6 rounded-full border-4 border-blue-500 border-opacity-40 animate-pulse" style="animation-delay: 0.2s"></div>
+                        <div class="absolute inset-12 rounded-full border-4 border-blue-500 border-opacity-50 animate-pulse" style="animation-delay: 0.4s"></div>
+                        
+                        <!-- Center Icon -->
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <div class="w-20 h-20 bg-blue-600 rounded-full flex items-center justify-center shadow-lg">
+                                <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Feature Points -->
+                <div class="mt-12 space-y-6">
+                    <div class="flex items-start scroll-animate" style="transition-delay: 0.2s">
+                        <div class="bg-blue-500 bg-opacity-20 p-2 rounded-lg mr-4">
+                            <svg class="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold text-white">Fast Authentication</h3>
+                            <p class="text-gray-400 text-sm">Secure login with institutional credentials</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start scroll-animate" style="transition-delay: 0.4s">
+                        <div class="bg-blue-500 bg-opacity-20 p-2 rounded-lg mr-4">
+                            <svg class="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold text-white">End-to-End Security</h3>
+                            <p class="text-gray-400 text-sm">Military-grade encryption for all votes</p>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div>
-                <label for="password" class="block text-white font-semibold">Password</label>
-                <input type="password" id="password" name="password"
-                    class="w-full p-2 mt-1 border border-blue-500 bg-transparent text-white rounded focus:outline-none focus:ring-2 focus:ring-yellow-400"
-                    required>
+        </div>
+        
+        <!-- Right Side - Login Form -->
+        <div class="scroll-animate">
+            <div class="auth-card p-8 rounded-xl max-w-md mx-auto shadow-xl">
+                <div class="text-center mb-8">
+                    <h1 class="text-3xl font-bold text-white mb-2">Welcome to DigiVote</h1>
+                    <p class="text-gray-400">Sign in to access your voting dashboard</p>
+                </div>
+                
+                <form action="/auth/Login" method="post" class="space-y-6">
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-gray-300 mb-2">Email Address</label>
+                        <input 
+                            type="email" 
+                            id="email" 
+                            name="email"
+                            class="w-full px-4 py-3 auth-input text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            placeholder="student@college.edu"
+                            required
+                        >
+                    </div>
+                    
+                    <div>
+                        <label for="password" class="block text-sm font-medium text-gray-300 mb-2">Password</label>
+                        <input 
+                            type="password" 
+                            id="password" 
+                            name="password"
+                            class="w-full px-4 py-3 auth-input text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            placeholder="••••••••"
+                            required
+                        >
+                    </div>
+                    
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center">
+                            <input id="remember-me" name="remember-me" type="checkbox" class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-600 rounded">
+                            <label for="remember-me" class="ml-2 block text-sm text-gray-300">Remember me</label>
+                        </div>
+                        <a href="#" class="text-sm text-blue-400 hover:underline">Forgot password?</a>
+                    </div>
+                    
+                    <button type="submit" class="w-full py-3 auth-btn text-white font-bold rounded-lg">
+                        Sign In
+                    </button>
+                    
+                    <div class="text-center text-sm text-gray-400 pt-4">
+                        <p>Don't have an account? 
+                            <a href="/auth/signup" class="font-semibold text-yellow-400 hover:text-yellow-300 hover:underline">
+                                Register now
+                            </a>
+                        </p>
+                    </div>
+                </form>
             </div>
-            <div>
-                <button type="submit"
-                    class="w-full py-2 bg-blue-600 text-white font-bold rounded hover:bg-yellow-400 hover:text-black transition">
-                    Login
-                </button>
-            </div>
-            <div class="text-white text-sm text-center">
-                <span>Not a user? <a href="/auth/signup" class="text-yellow-400 font-bold hover:underline">Sign
-                        up</a></span>
-            </div>
-        </form>
+        </div>
     </div>
 </div>
+
+<!-- Scroll Animation Script -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const scrollElements = document.querySelectorAll('.scroll-animate');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const delay = entry.target.style.transitionDelay || '0s';
+                    setTimeout(() => {
+                        entry.target.classList.add('animate-visible');
+                    }, parseFloat(delay) * 1000);
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+
+        scrollElements.forEach(el => {
+            observer.observe(el);
+        });
+    });
+</script>

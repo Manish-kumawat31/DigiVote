@@ -1,41 +1,202 @@
 <% layout('/layouts/boilerplate') -%>
 
- <!-- Navbar -->
- <nav class="flex justify-between items-center p-5 bg-gray-900 shadow-lg">
-    <div class="text-xl font-bold text-blue-400">DigiVote</div>
-    <ul class="flex space-x-6">
-        <li><a href="/index/read-more" class="hover:text-blue-400">About</a></li>
-        <li><a href="#contact" class="hover:text-blue-400">Contact</a></li>
-    </ul>
-    <div class="space-x-3">
-        <% if (ifUser) { %>
-            <a href="/auth/logout" class="bg-blue-500 px-4 py-2 rounded hover:bg-blue-700">Logout</a>
-        <% } else { %>
-            <a href="/auth/login" class="bg-blue-500 px-4 py-2 rounded hover:bg-blue-700">Login</a>
-            <a href="/auth/signup" class="bg-green-500 px-4 py-2 rounded hover:bg-green-700">Signup</a>
-        <% } %>
-    </div>
-</nav>
+<style>
+    /* Custom animations */
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fade {
+        opacity: 0;
+        animation: fadeIn 0.8s ease-out forwards;
+    }
+    .hover-scale {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .hover-scale:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+    }
+    .gradient-text {
+        background-clip: text;
+        -webkit-background-clip: text;
+        color: transparent;
+        background-image: linear-gradient(90deg, #3b82f6, #8b5cf6);
+    }
+    .gradient-bg {
+        background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
+    }
+    .floating {
+        animation: floating 6s ease-in-out infinite;
+    }
+    @keyframes floating {
+        0% { transform: translateY(0px); }
+        50% { transform: translateY(-15px); }
+        100% { transform: translateY(0px); }
+    }
+</style>
 
-<!-- Hero Section -->
-<div class="flex flex-col md:flex-row items-center justify-center h-screen px-10">
-    <div class="md:w-1/2 text-center md:text-left">
-        <h1 class="text-5xl font-bold">Be a Part of Decision</h1>
-        <h2 class="text-3xl text-blue-400 mt-2">Vote Today</h2>
-        <div class="mt-6 space-x-4">
+<!-- Modern Hero Section with Abstract Design -->
+<div class="min-h-screen flex flex-col md:flex-row items-center justify-center px-6 md:px-16 py-20 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 relative overflow-hidden">
+    <!-- Abstract background elements -->
+    <div class="absolute top-20 left-10 w-64 h-64 bg-blue-600 rounded-full filter blur-3xl opacity-10"></div>
+    <div class="absolute bottom-20 right-10 w-64 h-64 bg-purple-600 rounded-full filter blur-3xl opacity-10"></div>
+    
+    <div class="md:w-1/2 text-center md:text-left space-y-6 animate-fade z-10">
+        <h1 class="text-5xl md:text-6xl font-bold text-white leading-tight">
+            Be a Part of <span class="gradient-text">Decision</span>
+        </h1>
+        <h2 class="text-3xl md:text-4xl text-blue-400 font-semibold">Vote Today</h2>
+        <p class="text-gray-300 text-lg max-w-lg">
+            Secure, transparent and accessible digital voting platform for modern democracy.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 mt-8 animate-fade" style="animation-delay: 0.3s">
             <% if (ifUser) { %>
                 <% if (ifUser.info) { %>
-                    <a href="/login/<%= ifUser._id %>/home" class="bg-blue-500 px-6 py-3 rounded-lg hover:bg-blue-700">Get Started</a>
+                    <a href="/login/<%= ifUser._id %>/home" class="bg-blue-600 hover:bg-blue-700 px-8 py-3.5 rounded-lg font-medium text-lg transition-all hover-scale shadow-lg text-center">
+                        Get Started
+                    </a>
                 <% } else { %>
-                    <a href="/login/<%= ifUser._id %>/profile" class="bg-blue-500 px-6 py-3 rounded-lg hover:bg-blue-700">Get Started</a>
+                    <a href="/login/<%= ifUser._id %>/profile" class="bg-blue-600 hover:bg-blue-700 px-8 py-3.5 rounded-lg font-medium text-lg transition-all hover-scale shadow-lg text-center">
+                        Complete Profile
+                    </a>
                 <% } %>
             <% } else { %>
-                <a href="/auth/login" class="bg-blue-500 px-6 py-3 rounded-lg hover:bg-blue-700">Get Started</a>
+                <a href="/auth/login" class="bg-blue-600 hover:bg-blue-700 px-8 py-3.5 rounded-lg font-medium text-lg transition-all hover-scale shadow-lg text-center">
+                    Get Started
+                </a>
             <% } %>
-            <a href="/index/read-more" class="bg-gray-700 px-6 py-3 rounded-lg hover:bg-gray-600">Read More</a>
+            <a href="/index/read-more" class="bg-gray-700 hover:bg-gray-600 px-8 py-3.5 rounded-lg font-medium text-lg transition-all hover-scale shadow-lg text-center">
+                Learn More
+            </a>
         </div>
     </div>
-    <div class="md:w-1/2 flex justify-center mt-10 md:mt-0">
-        <img src="/images/lets_vote.png" alt="Vote" class="w-80">
+    <div class="md:w-1/2 flex justify-center mt-16 md:mt-0 animate-fade z-10" style="animation-delay: 0.5s">
+        <!-- Abstract voting visualization -->
+        <div class="relative w-80 h-80">
+            <div class="absolute top-0 left-0 w-full h-full bg-blue-500 rounded-full opacity-20 filter blur-xl"></div>
+            <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-white bg-opacity-5 rounded-full backdrop-blur-md border border-white border-opacity-10 flex items-center justify-center floating">
+                <div class="text-center p-6">
+                    <svg class="w-20 h-20 mx-auto text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                    </svg>
+                    <h3 class="text-xl font-bold text-white mt-4">Secure Digital Voting</h3>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
+
+<!-- Features Section with Scroll Animation -->
+<section class="py-20 px-6 md:px-16 bg-gray-800">
+    <div class="max-w-6xl mx-auto">
+        <h2 class="text-3xl md:text-4xl font-bold text-center text-white mb-16 scroll-animate">Why Choose DigiVote?</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Feature 1 -->
+            <div class="bg-gray-700 p-8 rounded-xl hover-scale transition-all duration-300 scroll-animate" data-delay="0.1s">
+                <div class="w-14 h-14 bg-blue-500 rounded-lg flex items-center justify-center mb-6">
+                    <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                    </svg>
+                </div>
+                <h3 class="text-xl font-semibold text-white mb-3">Secure Voting</h3>
+                <p class="text-gray-300">
+                    End-to-end encrypted votes with blockchain technology for maximum security.
+                </p>
+            </div>
+            
+            <!-- Feature 2 -->
+            <div class="bg-gray-700 p-8 rounded-xl hover-scale transition-all duration-300 scroll-animate" data-delay="0.2s">
+                <div class="w-14 h-14 bg-purple-500 rounded-lg flex items-center justify-center mb-6">
+                    <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                    </svg>
+                </div>
+                <h3 class="text-xl font-semibold text-white mb-3">Instant Results</h3>
+                <p class="text-gray-300">
+                    Real-time vote counting with transparent, verifiable results.
+                </p>
+            </div>
+            
+            <!-- Feature 3 -->
+            <div class="bg-gray-700 p-8 rounded-xl hover-scale transition-all duration-300 scroll-animate" data-delay="0.3s">
+                <div class="w-14 h-14 bg-green-500 rounded-lg flex items-center justify-center mb-6">
+                    <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                    </svg>
+                </div>
+                <h3 class="text-xl font-semibold text-white mb-3">Accessible</h3>
+                <p class="text-gray-300">
+                    Vote from anywhere, anytime with our mobile-friendly platform.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Section -->
+<section id="contact" class="py-20 px-6 md:px-16 bg-gray-900">
+    <div class="max-w-4xl mx-auto text-center scroll-animate">
+        <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">Contact Us</h2>
+        <p class="text-gray-300 mb-12 max-w-2xl mx-auto">
+            Have questions about our voting platform? Get in touch with our team.
+        </p>
+        <div class="bg-gray-800 rounded-xl p-8 md:p-12 shadow-xl scroll-animate" data-delay="0.2s">
+            <form class="space-y-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <input type="text" placeholder="Your Name" class="w-full px-5 py-3 bg-gray-700 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
+                    <div>
+                        <input type="email" placeholder="Your Email" class="w-full px-5 py-3 bg-gray-700 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
+                </div>
+                <div>
+                    <textarea placeholder="Your Message" rows="4" class="w-full px-5 py-3 bg-gray-700 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+                </div>
+                <button type="submit" class="bg-blue-600 hover:bg-blue-700 px-8 py-3.5 rounded-lg font-medium text-lg transition-all hover-scale shadow-lg w-full md:w-auto">
+                    Send Message
+                </button>
+            </form>
+        </div>
+    </div>
+</section>
+
+
+
+<!-- Scroll Animation Script -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Simple scroll animation
+        const scrollAnimateElements = document.querySelectorAll('.scroll-animate');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const delay = entry.target.getAttribute('data-delay') || 0;
+                    setTimeout(() => {
+                        entry.target.style.opacity = 1;
+                        entry.target.style.transform = 'translateY(0)';
+                    }, delay * 1000);
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+
+        scrollAnimateElements.forEach(el => {
+            el.style.opacity = 0;
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
+            observer.observe(el);
+        });
+
+        // Floating animation for the hero graphic
+        const floatingElements = document.querySelectorAll('.floating');
+        floatingElements.forEach((el, index) => {
+            el.style.animationDelay = `${index * 0.2}s`;
+        });
+    });
+</script>

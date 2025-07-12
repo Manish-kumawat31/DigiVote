@@ -14,7 +14,7 @@ const User = require("./models/User.js")
 const mongoose = require('mongoose');
 const { send } = require('process');
 const { constants } = require('buffer');
-const errorHandler = require("./middlewares/errorHandler");
+const errorHandler = require("./middlewares/errorMiddleware");
 const Election = require('./models/election.js');
 // Import Routes
 const authRoutes = require("./routes/authRoutes");
@@ -77,7 +77,8 @@ app.use((req, res, next) => {
     });
 });
 
-// Error Handling Middleware
+
+// Global Error Handling Middleware (Must be last)
 app.use(errorHandler);
 
 

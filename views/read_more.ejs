@@ -1,36 +1,159 @@
 <% layout('/layouts/boilerplate') -%>
 
-<div class="container mx-auto px-6 py-12 text-white">
-    <h1 class="text-4xl font-bold text-center mb-6">Learn More About DigiVote</h1>
-    <p class="text-lg text-center max-w-3xl mx-auto mb-10">
-        DigiVote is a secure and transparent digital voting platform designed for colleges and universities.
-        Our system ensures a seamless and fair election process, empowering students to have a voice in decision-making.
-    </p>
-    
-    <div class="grid md:grid-cols-2 gap-10">
-        <div class="bg-gray-900 p-6 rounded-lg shadow-lg">
-            <h2 class="text-2xl font-semibold mb-4">Why Choose DigiVote?</h2>
-            <ul class="list-disc list-inside space-y-2 text-gray-300">
-                <li>Secure and tamper-proof voting system</li>
-                <li>User-friendly and accessible interface</li>
-                <li>Real-time result updates</li>
-                <li>Multi-level authentication for voters</li>
-                <li>Adaptable for various college elections</li>
-            </ul>
+<style>
+    /* Custom animations */
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fade {
+        opacity: 0;
+        animation: fadeIn 0.8s ease-out forwards;
+    }
+    .gradient-text {
+        background-clip: text;
+        -webkit-background-clip: text;
+        color: transparent;
+        background-image: linear-gradient(90deg, #3b82f6, #8b5cf6);
+    }
+    .card-hover {
+        transition: all 0.3s ease;
+    }
+    .card-hover:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    }
+    .list-item {
+        transition: all 0.3s ease;
+    }
+    .list-item:hover {
+        color: white;
+        transform: translateX(5px);
+    }
+</style>
+
+<div class="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 py-16 px-6">
+    <div class="max-w-6xl mx-auto">
+        <!-- Header Section -->
+        <div class="text-center mb-16 animate-fade">
+            <h1 class="text-4xl md:text-5xl font-bold mb-6">
+                Learn More About <span class="gradient-text">DigiVote</span>
+            </h1>
+            <p class="text-lg text-gray-300 max-w-3xl mx-auto">
+                DigiVote is a secure and transparent digital voting platform designed for colleges and universities.
+                Our system ensures a seamless and fair election process, empowering students to have a voice in decision-making.
+            </p>
         </div>
         
-        <div class="bg-gray-900 p-6 rounded-lg shadow-lg">
-            <h2 class="text-2xl font-semibold mb-4">How It Works?</h2>
-            <ol class="list-decimal list-inside space-y-2 text-gray-300">
-                <li>Students sign up using their college credentials</li>
-                <li>Admin verifies and approves eligible candidates</li>
-                <li>Voters log in and securely cast their votes</li>
-                <li>Once voting ends, results are published instantly</li>
-            </ol>
+        <!-- Cards Grid -->
+        <div class="grid md:grid-cols-2 gap-8 mb-16">
+            <!-- Why Choose DigiVote Card -->
+            <div class="bg-gray-800 bg-opacity-50 backdrop-blur-sm p-8 rounded-xl border border-gray-700 card-hover animate-fade" style="animation-delay: 0.2s">
+                <div class="flex items-center mb-6">
+                    <div class="w-12 h-12 bg-blue-500 bg-opacity-20 rounded-lg flex items-center justify-center mr-4">
+                        <svg class="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                    </div>
+                    <h2 class="text-2xl font-semibold">Why Choose DigiVote?</h2>
+                </div>
+                <ul class="space-y-4">
+                    <li class="list-item flex items-start">
+                        <svg class="w-5 h-5 text-blue-400 mt-0.5 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                        </svg>
+                        <span>Secure and tamper-proof voting system</span>
+                    </li>
+                    <li class="list-item flex items-start">
+                        <svg class="w-5 h-5 text-blue-400 mt-0.5 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                        </svg>
+                        <span>User-friendly and accessible interface</span>
+                    </li>
+                    <li class="list-item flex items-start">
+                        <svg class="w-5 h-5 text-blue-400 mt-0.5 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                        </svg>
+                        <span>Real-time result updates</span>
+                    </li>
+                    <li class="list-item flex items-start">
+                        <svg class="w-5 h-5 text-blue-400 mt-0.5 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                        </svg>
+                        <span>Multi-level authentication for voters</span>
+                    </li>
+                    <li class="list-item flex items-start">
+                        <svg class="w-5 h-5 text-blue-400 mt-0.5 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                        </svg>
+                        <span>Adaptable for various college elections</span>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- How It Works Card -->
+            <div class="bg-gray-800 bg-opacity-50 backdrop-blur-sm p-8 rounded-xl border border-gray-700 card-hover animate-fade" style="animation-delay: 0.4s">
+                <div class="flex items-center mb-6">
+                    <div class="w-12 h-12 bg-purple-500 bg-opacity-20 rounded-lg flex items-center justify-center mr-4">
+                        <svg class="w-6 h-6 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                        </svg>
+                    </div>
+                    <h2 class="text-2xl font-semibold">How It Works?</h2>
+                </div>
+                <ol class="space-y-4">
+                    <li class="list-item flex items-start">
+                        <span class="w-6 h-6 bg-blue-500 bg-opacity-20 text-blue-400 rounded-full flex items-center justify-center mr-3 flex-shrink-0">1</span>
+                        <span>Students sign up using their college credentials</span>
+                    </li>
+                    <li class="list-item flex items-start">
+                        <span class="w-6 h-6 bg-blue-500 bg-opacity-20 text-blue-400 rounded-full flex items-center justify-center mr-3 flex-shrink-0">2</span>
+                        <span>Admin verifies and approves eligible candidates</span>
+                    </li>
+                    <li class="list-item flex items-start">
+                        <span class="w-6 h-6 bg-blue-500 bg-opacity-20 text-blue-400 rounded-full flex items-center justify-center mr-3 flex-shrink-0">3</span>
+                        <span>Voters log in and securely cast their votes</span>
+                    </li>
+                    <li class="list-item flex items-start">
+                        <span class="w-6 h-6 bg-blue-500 bg-opacity-20 text-blue-400 rounded-full flex items-center justify-center mr-3 flex-shrink-0">4</span>
+                        <span>Once voting ends, results are published instantly</span>
+                    </li>
+                </ol>
+            </div>
+        </div>
+        
+        <!-- CTA Section -->
+        <div class="text-center animate-fade" style="animation-delay: 0.6s">
+            <a href="/index" class="inline-flex items-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-lg shadow-lg transition-all transform hover:scale-105">
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+                </svg>
+                Go Back Home
+            </a>
         </div>
     </div>
-    
-    <div class="text-center mt-10">
-        <a href="/index" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg shadow-lg transition">Go Back Home</a>
-    </div>
 </div>
+
+<!-- Scroll Animation Script -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Simple scroll animation
+        const animateElements = document.querySelectorAll('.animate-fade');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const delay = entry.target.style.animationDelay || '0s';
+                    entry.target.style.opacity = 1;
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+
+        animateElements.forEach(el => {
+            observer.observe(el);
+        });
+    });
+</script>
