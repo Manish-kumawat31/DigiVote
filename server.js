@@ -63,6 +63,11 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 // Routes
+
+// Redirect root to /index
+app.get("/", (req, res) => {
+  res.redirect("/index");
+});
 app.use("/index" , indexRoutes);
 app.use("/auth", authRoutes);
 app.use("/login/admin", adminRoutes);
